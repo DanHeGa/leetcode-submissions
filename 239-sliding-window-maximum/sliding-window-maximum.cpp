@@ -7,23 +7,20 @@ public:
         int n = nums.size();
 
         priority_queue<pair<int, int>> pq;
-        while(r <= n) {
-            if ((r - l + 1) > k) {
+        while(r < n) {
+            pq.push({nums[r], r});
+
+            while(pq.top().second < l) {
+                pq.pop();
+            }
+
+            if ((r - l + 1) == k) {
                 l++;
                 int windowMax = pq.top().first;
                 res.push_back(windowMax);
-                while(pq.size() > 0 && pq.top().second < l) {
-                    pq.pop();
-                }
-
             }
 
-            if (r == n) {
-                break;
-            } else {
-                pq.push({nums[r], r});
-                r++;
-            }
+           r++;
         }
 
         return res;
