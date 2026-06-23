@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        map<vector<int>, vector<string>> mp;
+        unordered_map<string, vector<string>> mp;
         vector<vector<string>> res;
 
         for (string word : strs) {
@@ -10,7 +10,12 @@ public:
                 freqC[letter - 'a']++;
             }
 
-            mp[freqC].push_back(word);
+            string key = "";
+            for (int count : freqC) {
+                key += to_string(count) + "#";
+            }
+
+            mp[key].push_back(word);
         }
 
         for (auto [head, anagrams] : mp) {
