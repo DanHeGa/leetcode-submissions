@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        sort(nums.begin(), nums.end());
 
        //count each num frequency
         unordered_map<int, int> freq;
