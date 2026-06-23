@@ -1,26 +1,29 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        vector<int> res;
-        int r = 0;
-        int l = 0;
+        int right = 0;
+        int left = 0;
         int n = nums.size();
-
         priority_queue<pair<int, int>> pq;
-        while(r < n) {
-            pq.push({nums[r], r});
+        vector<int> res;
 
-            while(pq.top().second < l) {
+        while(right < n) {
+            //push element to window heap
+            pq.push({nums[right], right});
+
+            //clean heap from elements out of window range
+            while(pq.top().second < left){
                 pq.pop();
             }
 
-            if ((r - l + 1) == k) {
-                l++;
+            //register window max if window is possible to form
+            if ((right - left + 1) == k) {
                 int windowMax = pq.top().first;
                 res.push_back(windowMax);
+                left++;
             }
 
-           r++;
+            right++;
         }
 
         return res;
@@ -32,7 +35,7 @@ input nums = [5  6  -1 -3  5  3  6  7], k = 3
 
 0   1   2   3  4  5  6  7 indexes
 l
-               r
+            r
 [1  3  -1] -3  5  3  6  7       3   
  1 [3  -1  -3] 5  3  6  7       3
  1  3 [-1  -3  5] 3  6  7       5
