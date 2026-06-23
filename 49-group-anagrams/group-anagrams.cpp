@@ -11,7 +11,7 @@ public:
             }
 
             string key = "";
-            for (int count : freqC) {
+            for (int count : freqC) { //O(1) becauase it's a fixed size vector
                 key += to_string(count) + "#";
             }
 
