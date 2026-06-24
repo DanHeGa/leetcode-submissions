@@ -12,12 +12,6 @@ public:
             freqT[letter - 'a']++;
         }
 
-        string sKey = "", tKey = "";
-        for (int i = 0; i < 26; i++) {
-            sKey += to_string(freqS[i]) + "#";
-            tKey += to_string(freqT[i]) + "#";
-        }
-
-        return sKey == tKey;
+        return freqS == freqT;
     }
 };
