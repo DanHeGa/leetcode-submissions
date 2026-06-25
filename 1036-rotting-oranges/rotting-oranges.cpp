@@ -1,13 +1,13 @@
 class Solution {
 public:
-    void checkRottens(queue<pair<int, int>> rottens) {
-        while(!rottens.empty()) {
-            pair<int, int> thing = rottens.front();
-            rottens.pop();
-            cout << "( " << thing.first << " , " << thing.second << " ), ";
-        }
-        cout << endl;
-    }
+    // void checkRottens(queue<pair<int, int>> rottens) {
+    //     while(!rottens.empty()) {
+    //         pair<int, int> thing = rottens.front();
+    //         rottens.pop();
+    //         cout << "( " << thing.first << " , " << thing.second << " ), ";
+    //     }
+    //     cout << endl;
+    // }
 
     int orangesRotting(vector<vector<int>>& grid) {
         queue<pair<int, int>> rottens;
@@ -34,7 +34,7 @@ public:
             int qSize = rottens.size();
             // cout << "queue size " << qSize << endl;
             cout << "minutes: " << minutes << endl;
-            checkRottens(rottens);
+            // checkRottens(rottens);
 
             bool smthRot = false;
             for(int i = 0; i < qSize; i++) {
