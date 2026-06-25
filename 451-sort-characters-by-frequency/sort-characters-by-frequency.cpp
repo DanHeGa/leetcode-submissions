@@ -7,18 +7,18 @@ public:
         }
 
         //get each unique char from the hashmap
-       vector<char> uniques;
-        for (auto freq : freqs) {
-            uniques.push_back(freq.first);
+        int n = s.length();
+        vector<vector<char>> buckets(n + 1);
+        
+        for(auto freq : freqs) {
+            buckets[freq.second].push_back(freq.first);
         }
 
-        sort(uniques.begin(), uniques.end(), [&](const char a, const char b) {
-            return freqs[a] > freqs[b];
-        });
-        
         string res = "";
-        for(char c : uniques) {
-            res += string(freqs[c], c);
+        for(int i = n; i >= 0; i--) {
+            for(char c : buckets[i]) {
+                res += string(i, c);
+            }
         }
 
         return res;
