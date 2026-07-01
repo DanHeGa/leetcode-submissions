@@ -6,6 +6,8 @@ public:
     };
 
     bool validTree(int n, vector<vector<int>>& edges) {
+        if (edges.size() < n - 1) return 0;
+
         vector<int> parents(n);
         iota(parents.begin(), parents.end(), 0);
 
