@@ -35,7 +35,7 @@ public:
                 parents[root2] = root1;
             } else {
                 parents[root1] = root2;
-                rank[root1]++;
+                rank[root2]++;
             }
         }
 
