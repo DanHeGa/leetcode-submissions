@@ -1,14 +1,16 @@
 class Solution {
 public:
 
-    int find(int node, unordered_map<int, int>& parents) {
-        if (parents[node] == node) return node;
-        return find(parents[node], parents);
+    int find(int node, vector<int>& parents) {
+        if (parents[node] != node) {
+            parents[node] = find(parents[node], parents);
+        }
+        return parents[node];
     }
 
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         int n = edges.size();
-        unordered_map<int, int> parents;
+        vector<int> parents(n + 1);
         for (int i = 1; i <= n; i++) {
             parents[i] = i;
         }
