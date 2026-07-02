@@ -16,6 +16,7 @@ public:
         }
 
         vector<int> res = {};
+        vector<int> rank(n + 1, 0); 
         for (auto& edge : edges) {
             int node1 = edge[0];
             int node2 = edge[1];
@@ -28,7 +29,14 @@ public:
                 continue;
             }
 
-            parents[root1] = root2;
+            if (rank[root1] < rank[root2]) {
+                parents[root1] = root2;
+            } else if (rank[root2] < rank[root1]) {
+                parents[root2] = root1;
+            } else {
+                parents[root1] = root2;
+                rank[root1]++;
+            }
         }
 
         return res;
