@@ -1,7 +1,7 @@
 class MedianFinder {
 private:
-    priority_queue<double> maxheap;
-    priority_queue<double, vector<double>, greater<double>> minheap;
+    priority_queue<int> maxheap;
+    priority_queue<int, vector<int>, greater<int>> minheap;
     int size;
 public:
     MedianFinder() {
@@ -24,11 +24,11 @@ public:
 
         //check we still have valid size for both array partitions
         if (minheap.size() > maxheap.size() + 1) {
-            double ele = minheap.top();
+            int ele = minheap.top();
             minheap.pop();
             maxheap.push(ele);
         } else if (maxheap.size() > minheap.size() + 1) {
-            double ele = maxheap.top();
+            int ele = maxheap.top();
             maxheap.pop();
             minheap.push(ele);
         }
@@ -38,7 +38,7 @@ public:
     
     double findMedian() {
         if (size % 2 == 0) {
-            return (maxheap.top() + minheap.top()) / 2;
+            return (maxheap.top() + minheap.top()) / 2.0;
         } else { //odd size
             if (maxheap.size() > minheap.size()) {
                 return maxheap.top();
