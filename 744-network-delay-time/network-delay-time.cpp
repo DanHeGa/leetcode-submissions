@@ -2,7 +2,7 @@ class Solution {
 public:
 
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        unordered_map<int, vector<pair<int, int>>> adjList(n); //Space O(E + V) number of nodes
+        vector<vector<pair<int, int>>> adjList(n + 1); //Space O(E + V) number of nodes
         for(auto &time : times) { //time O(E) for number of times 
             pair<int, int> neighbor = {time[2], time[1]}; //(cost, destiny)
             adjList[time[0]].push_back(neighbor);
