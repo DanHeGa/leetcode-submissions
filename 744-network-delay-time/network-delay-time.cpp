@@ -13,20 +13,24 @@ public:
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minheap; //space O(E) an origin node could have all the rest of the nodes as direct neighbors
         pair<int, int> startNodePair = {0, k};
         minheap.push(startNodePair); //time O(logV)
+        unordered_set<int> visited;
 
         while(!minheap.empty()) { //time O(E)
             pair<int, int> currNodePair = minheap.top();
+            minheap.pop();
             int currNode = currNodePair.second;
 
-            minheap.pop();
+            if (visited.count(currNode)) continue;
 
+            visited.insert(currNode);
+            
             for(auto &neigh : adjList[currNode]) {//O(E logV)
                 int neighCurrCost = neigh.first;
                 int neighNode = neigh.second;
 
                 if (dist[neighNode] > (dist[currNode] + neighCurrCost)) {
                     dist[neighNode] = dist[currNode] + neighCurrCost;
-                    minheap.push(neigh);
+                    minheap.push({dist[neighNode], neigh.second});
                 }
             }
         }
