@@ -34,7 +34,6 @@ public:
             }
         }
 
-        cout << numCourses << " and yours gave: " << courseCount << endl;
         return courseCount == numCourses;
     }
 };
