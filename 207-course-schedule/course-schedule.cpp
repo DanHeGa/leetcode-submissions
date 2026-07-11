@@ -2,7 +2,7 @@ class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         //build adjList
-        unordered_map<int, vector<int>> adjList(numCourses);
+        vector<vector<int>> adjList(numCourses);
         vector<int> indegree(numCourses);
         
         for (auto &prereq : prerequisites) {
