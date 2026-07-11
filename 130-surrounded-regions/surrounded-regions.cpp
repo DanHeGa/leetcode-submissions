@@ -1,14 +1,6 @@
 class Solution {
 public:
     int rows, cols;
-    void print(vector<vector<char>>& board) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cout << board[i][j] << " ";
-            }
-            cout << endl;
-        }
-    }
 
     void dfs(int i, int j, vector<vector<char>>& board) {
         if (board[i][j] != 'O') {
@@ -39,15 +31,11 @@ public:
             if (board[i][cols - 1] == 'O') dfs(i, cols - 1, board);
         }
 
-        print(board);
-
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (board[i][j] == 'T') board[i][j] = 'O';
                 else if (board[i][j] == 'O') board[i][j] = 'X';
             }
         }
-        cout << "last" << endl;
-        print(board);
     }
 };
