@@ -27,13 +27,11 @@ public:
                     //union by rank
                     if (rank[parentI] > rank[parentJ]) {
                         parents[parentJ] = parentI;
-                        rank[parentI]++;
                     } else if (rank[parentJ] > rank[parentI]) {
                         parents[parentI] = parentJ;
-                        rank[parentJ]++;
                     } else { //same rank
                         parents[parentJ] = parentI;
-                        rank[parentI];
+                        rank[parentI]++;
                     }
 
                     cities--;
@@ -42,8 +40,5 @@ public:
         }
 
         return cities;
-
-        return cities;
-
     }
 };
