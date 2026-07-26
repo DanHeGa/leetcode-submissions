@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int find(int x, vector<int> parents) {
+    int find(int x, vector<int> &parents) {
         if (parents[x] != x) {
             parents[x] = find(parents[x], parents);
         }
