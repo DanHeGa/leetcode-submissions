@@ -13,13 +13,8 @@ public:
             return;
         }
 
-        string currSubAns = currParenthesis;
-
-        string withOpen = currSubAns + '(';
-        dfs(withOpen, open + 1, close, n);
-
-        string withClose = currSubAns + ')';
-        dfs(withClose, open, close + 1, n);
+        dfs(currParenthesis + '(', open + 1, close, n);
+        dfs(currParenthesis + ')', open, close + 1, n);
     }
 
     vector<string> generateParenthesis(int n) {
