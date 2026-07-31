@@ -1,5 +1,7 @@
 class Solution {
 public:
+    //function with recursive approach
+    //it goes bottom to top
     double customPow(double x, int n) { //x^n
         if (n == 0) return 1; //all num to the power of 1 is zero.
 
@@ -12,12 +14,30 @@ public:
         }
     }
 
+    double iterativePow(double x, long long n) {
+        double ans = 1;
+        double base = x;
+
+        while(n > 0) {
+            if (n & 1) {
+                ans *= base;
+            }
+
+            base *= base;
+            n >>= 1;
+        }
+
+        return ans;
+    }
+
+    //iterative approach, top to bottom
     double myPow(double x, int n) {
-        if( n < 0 ) {
-            double res = customPow(x, n);
-            return 1 / res;
+        long long N = n; //for overflowing cases
+    
+        if (n < 0) {
+            return 1 / iterativePow(x, -N);
         } else {
-            return customPow(x, n);
+            return iterativePow(x, N);
         }
     }
 };
