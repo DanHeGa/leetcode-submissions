@@ -4,8 +4,8 @@ public:
     unordered_map<int, int> idxMap;
 
     RandomizedSet() {
-        vector<int> vecSet;
-        unordered_map<int, int> idxMap;
+        vector<int> vecSet = {};
+        unordered_map<int, int> idxMap = {};
     }
     
     bool insert(int val) {
