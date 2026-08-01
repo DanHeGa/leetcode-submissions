@@ -13,16 +13,6 @@ class Solution {
 public:
     map<int, vector<pair<int, int>>> columns;
 
-    void print() {
-        for (auto ele : columns) {
-            cout << "weight: " << ele.first << " -> ";
-            for (pair<int, int> nodePair : ele.second) {
-                cout << "d: " << nodePair.first << " val: " << nodePair.second <<  ", ";
-            }
-            cout << endl;
-        }
-    }
-
     void verticalInOrder(TreeNode* root, int weight, int depth){
         if (!root) {
             return;
@@ -36,8 +26,6 @@ public:
     vector<vector<int>> verticalOrder(TreeNode* root) {
         verticalInOrder(root, 0, 0);
         vector<vector<int>> res;
-
-        print();
 
         for (auto weightGroup : columns) {
             vector<pair<int, int>> nodes = weightGroup.second;
