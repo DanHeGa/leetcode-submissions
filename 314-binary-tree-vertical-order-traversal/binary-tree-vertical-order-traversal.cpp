@@ -16,16 +16,23 @@ public:
             return {};
         }
 
-        map<int, vector<int>> columns;
+        unordered_map<int, vector<int>> columns;
 
         queue<pair<int, TreeNode*>> q;
         q.push({0, root});
+
+        int minCol = INT_MAX;
+        int maxCol = INT_MIN;
 
         while(!q.empty()) {
             auto [weight, node] = q.front();
             q.pop();
 
             columns[weight].push_back(node->val);
+
+            //update min and max column indexes (weights)
+            minCol = min(minCol, weight);
+            maxCol = max(maxCol, weight);
 
             if (node->left) {
                 q.push({weight - 1, node->left});
@@ -36,8 +43,8 @@ public:
         }
 
         vector<vector<int>> ans;
-        for (auto column : columns) {
-            ans.push_back(column.second);
+        for (int i = minCol; i <= maxCol; i++) {
+            ans.push_back(columns[i]);
         }
 
         return ans;
