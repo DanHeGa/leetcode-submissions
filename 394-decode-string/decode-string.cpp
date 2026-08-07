@@ -4,7 +4,6 @@ public:
         stack<int> numStk;
         stack<string> subStrStk;
 
-        string result = "";
         string currStr = "";
         int currNum = 0;
         for (int i = 0; i < s.length(); i++) {
@@ -33,10 +32,6 @@ public:
             }
         }
 
-        if (currStr != "") {
-            result += currStr;
-        }
-
-        return result;
+        return currStr;
     }
 };
