@@ -8,12 +8,10 @@ public:
             }
         }   
 
-        cout << inner << endl;
         int left = 0; 
         int right = inner.length() - 1;
         while(left <= right) {
             if (inner[left] != inner[right]) {
-                cout << inner[left] << " and " << inner[right]  << " right: " << right << endl;
                 return false;
             }
 
