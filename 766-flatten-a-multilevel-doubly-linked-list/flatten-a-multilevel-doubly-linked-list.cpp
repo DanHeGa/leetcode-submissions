@@ -11,7 +11,7 @@ public:
 
 class Solution {
 public:
-    vector<Node*> flat(Node* head) { //we will return a vector with (start, end) of the level we are in
+    pair<Node*, Node*> flat(Node* head) { //we will return a vector with (start, end) of the level we are in
         //create aux var = head
         Node* aux = head;
         //set start = head as well;
@@ -23,9 +23,9 @@ public:
             //if aux has a child
             if (aux->child != nullptr) {
                 //(nextStart, nextEnd) = flat(child) //we will set the child as the ghead of it's level
-                vector<Node*> nxtLevelLimits = flat(aux->child);
-                Node* nextStart = nxtLevelLimits[0];
-                Node* nextEnd = nxtLevelLimits[1];
+                pair<Node*, Node*> nxtLevelLimits = flat(aux->child);
+                Node* nextStart = nxtLevelLimits.first;
+                Node* nextEnd = nxtLevelLimits.second;
                 //attach next level to current level
                 Node* currNext = aux->next;
                 aux->next = nextStart;
@@ -46,13 +46,13 @@ public:
 
         end = aux;
         
-        vector<Node*> res = {start, end};
+        pair<Node*, Node*> res = {start, end};
         return {start, end};
     }   
 
     Node* flatten(Node* head) {
         if (!head) return nullptr;
-        vector<Node*> res = flat(head);
-        return res[0];
+        pair<Node*, Node*> res = flat(head);
+        return res.first;
     }
 };
