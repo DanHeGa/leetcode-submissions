@@ -11,17 +11,13 @@ public:
 
         //inverse input matrix
         for (int i = 0; i <= mid; i++) {
-            vector<int> aux = matrix[i];
-            matrix[i] = matrix[n - i - 1];
-            matrix[n - i - 1] = aux;
+            swap(matrix[i], matrix[n - i -1]);
         }
 
         //transpose inverted matrix
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                int aux = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = aux;
+                swap(matrix[i][j], matrix[j][i]);
             }
         }
     }
