@@ -2,18 +2,18 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         //have a frequency map
-        unordered_map<char, int> freq;
+        vector<int> freq(26, 0);
 
         int maxFreq = 0;
 
         int l = 0;
         for (int r = 0; r < s.length(); r++) {
-            freq[s[r]]++;
-            maxFreq = max(maxFreq, freq[s[r]]);
+            freq[s[r] - 'A']++;
+            maxFreq = max(maxFreq, freq[s[r] - 'A']);
 
             int windowSize = r - l + 1;
             if (windowSize - maxFreq > k) {
-                freq[s[l]]--;
+                freq[s[l] - 'A']--;
                 l++;
             }
         }
