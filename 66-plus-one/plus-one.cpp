@@ -20,7 +20,6 @@ public:
         if (carry > 0){
             digits.push_back(carry);
         }
-        cout << "carry: " << carry;
 
         reverse(digits.begin(), digits.end());
         return digits;
