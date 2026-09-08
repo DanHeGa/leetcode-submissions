@@ -12,7 +12,6 @@ class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if (!head || head->next == nullptr) return head;
-
         int totalNodes = 0;
         ListNode* aux = head;
         while(aux != nullptr) {
@@ -21,11 +20,11 @@ public:
         }
 
         //case where k is more than the LL length
-        k = k % totalNodes;
+        k %= totalNodes;
         if (k == 0) return head;
 
         //initialize fast and slow pointers
-        ListNode* fast = head;
+        ListNode* fast = head; 
         ListNode* slow = head;
         for (int i = 0; i < k; i++) {
             fast = fast->next;
