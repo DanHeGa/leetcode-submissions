@@ -1,34 +1,53 @@
 class Solution {
 public:
     vector<int> findDiagonalOrder(vector<vector<int>>& mat) {
-        int n = mat.size();
-        int m = mat[0].size();
+        int rows = mat.size();
+        int cols = mat[0].size();
 
-        unordered_map<int, vector<int>> diagonals;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                int currEle = mat[i][j];
-                diagonals[i + j].push_back(currEle);
+        bool going_up = true;
+        int count = 0;
+        int totalElements = rows * cols;
+        vector<int> res(totalElements);
+
+        int row = 0;
+        int col = 0;
+        while(count < totalElements) {
+            if (going_up) {
+                while (row >= 0 && col < cols) {
+                    res[count] = mat[row][col];
+                    count++;
+
+                    row -= 1;
+                    col += 1;
+                }
+
+                if (row < 0 && col < cols) { //only the row is not within limits
+                    row += 1;
+                } else if (col >= cols) {
+                    row += 2;
+                    col -= 1;
+                }
+
+                going_up = false;
+            } else { //going down
+                while(row < rows && col >= 0) {
+                    res[count] = mat[row][col];
+                    count++;
+
+                    row += 1;
+                    col -= 1;
+                }
+
+                if (col < 0 && row < rows) {
+                    col += 1;
+                } else if (row >= rows) {
+                    col += 2;
+                    row -= 1;
+                }
+                
+                going_up = true;
             }
         }
-
-        //add to res vector
-        //if odd index sum, reverse the vector AND THEN, push it to the result
-        int numDiags = n + m - 1;
-        vector<int> res(n * m);
-        int resIdx = 0;
-        for (int i = 0; i < numDiags; i++) {
-            vector<int> currVec = diagonals[i];
-            if (i % 2 == 0) {
-                reverse(currVec.begin(), currVec.end());
-            }
-
-            for (int ele : currVec) {
-                res[resIdx] = ele;
-                resIdx++;
-            }
-        }
-
         return res;
     }
 };
