@@ -11,13 +11,14 @@ public:
         int squareCount = 0; 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if ((i - 1 < 0 || j - 1 < 0) && matrix[i][j] == 1) {
-                    dp[i][j] = 1;
-                    squareCount += dp[i][j];
+
+                if (matrix[i][j] == 0) {
                     continue;
                 }
 
-                if (matrix[i][j] == 1) {
+                if ((i - 1 < 0 || j - 1 < 0) && matrix[i][j] == 1) {
+                    dp[i][j] = 1;
+                } else if (matrix[i][j] == 1) {
                     dp[i][j] = min(min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
                 }
                 
