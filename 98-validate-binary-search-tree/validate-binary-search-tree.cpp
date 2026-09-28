@@ -11,25 +11,19 @@
  */
 class Solution {
 public:
-    vector<int> inOrderElements;
-    void inOrderTraversal(TreeNode* root) {
-        if (!root) return;
+    TreeNode* prev = nullptr;
+    bool inOrderTraversal(TreeNode* root) {
+        if (!root) return true;
 
-        inOrderTraversal(root->left);
-        inOrderElements.push_back(root->val);
-        inOrderTraversal(root->right);
-    }
-    bool isValidBST(TreeNode* root) {
-        inOrderTraversal(root); //fill vector with elements in order
-        //validate correct order, else, return false
-
-        int n = inOrderElements.size();
-        for (int i = 1; i < n; i++) {
-            if (inOrderElements[i - 1] >= inOrderElements[i]) {
-                return false;
-            }
+        if (!inOrderTraversal(root->left)) return false;
+        if (prev != nullptr && prev->val >= root->val) {
+            return false;
         }
 
-        return true;
+        prev = root;
+        return inOrderTraversal(root->right);
+    }
+    bool isValidBST(TreeNode* root) {
+        return inOrderTraversal(root);
     }
 };
