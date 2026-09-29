@@ -21,9 +21,6 @@ public:
 
         long long ac1Balance = balance[ac1Idx];
         long long ac2Balance = balance[ac2Idx];
-        cout << "Curr ac1 balance = " << ac1Balance << endl;
-        cout << "AC1 balance - money = " << ac1Balance - money << endl;
-        cout << "Money to tranfer = " << money << endl;
         if (ac1Balance - money < 0) {
             return false;
         } else {
