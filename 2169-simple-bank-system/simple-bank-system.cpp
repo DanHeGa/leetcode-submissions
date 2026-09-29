@@ -1,18 +1,21 @@
 class Bank {
 private: 
-    unordered_map<int, int> accounts;
+    vector<int> accounts;
     vector<long long> balance;
+    int accountsCount;
 public:
     Bank(vector<long long>& balance) {
         int n = balance.size(); //0->1, 1->2, and so on, to assign balances to accounts
+        accounts.resize(n + 1);
         for (int i = 0; i < n; i++) {
             accounts[i + 1] = i; //balance of each account, remember accounts start from 1
         }
         this->balance = balance;
+        this->accountsCount = n;
     }
     
     bool transfer(int account1, int account2, long long money) {
-        if (!(accounts.contains(account1) && accounts.contains(account2))) {
+        if (account1 < 1 || account1 > accountsCount || account2 < 1 || account2 > accountsCount) {
             return false; //both account should exists!!
         }
 
@@ -32,7 +35,7 @@ public:
     }
     
     bool deposit(int account, long long money) {
-        if (!accounts.contains(account)) return false;
+        if (account < 1 || account > accountsCount) return false;
 
         int idx = accounts[account];
         balance[idx] += money;
@@ -40,7 +43,7 @@ public:
     }
     
     bool withdraw(int account, long long money) {
-        if (!accounts.contains(account)) {
+        if (account < 1 || account > accountsCount) {
             return false;
         }
 
