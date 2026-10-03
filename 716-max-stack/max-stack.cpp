@@ -63,14 +63,15 @@ public:
         int valToDel = nodes.rbegin()->first; //max element
         Node* nodeToDel = nodes[valToDel].back();
 
-        //delete node
-        nodeToDel->prev->next = nodeToDel->next;
-        nodeToDel->next->prev = nodeToDel->prev;
-
         nodes[valToDel].pop_back();
         if (nodes[valToDel].empty()) {
             nodes.erase(valToDel);
         }
+        
+        //delete node
+        nodeToDel->prev->next = nodeToDel->next;
+        nodeToDel->next->prev = nodeToDel->prev;
+
 
         delete nodeToDel;
         return valToDel;
