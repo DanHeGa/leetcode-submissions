@@ -18,9 +18,9 @@ public:
             if (changes.contains(i)) {
                 prefixSum += changes[i];
                
-            }
-            if (prefixSum > capacity) {
-                return false;
+                if (prefixSum > capacity) {
+                    return false;
+                }
             }
 
         }
