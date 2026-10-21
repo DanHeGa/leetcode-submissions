@@ -6,16 +6,13 @@ public:
             res.push_back(sub);
             return;
         }
-
-        if (idx >= candidates.size() || sum > target){
-            return;
+        
+        for (int i = idx; i < candidates.size(); i++) {
+            if (sum + candidates[i] > target) continue;
+            sub.push_back(candidates[i]);
+            backHelper(i, sub, sum + candidates[i], candidates, target);
+            sub.pop_back();
         }
-
-        sub.push_back(candidates[idx]);
-        backHelper(idx, sub, sum + candidates[idx], candidates, target);
-
-        sub.pop_back();
-        backHelper(idx + 1, sub, sum, candidates, target);
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
