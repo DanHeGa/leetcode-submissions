@@ -11,24 +11,23 @@ public:
      * @return    The number of actual characters read
      */
 
-     // 6
-    int read(char *buf, int n) { //buf is where we should retutn all the read characters
-        int i = 0;
-        int read = 4;
+    int read(char *buf, int n) {
+        int realRead = 4;
+        char myBuf[4];
+        int bufIdx = 0;
         int count = 0;
-        char myBuf4[4];
-    
-        while(read >= 4) {
-            read = read4(myBuf4); //abc
-            cout << read << endl;
-            count += read;
-            for (int j = 0; j < read; j++) {
-                buf[i] = myBuf4[j];
-                i++;
 
-                if (i == n) {
-                    return i;
-                }
+        while(realRead == 4) {
+            realRead = read4(myBuf);
+            count += realRead;
+
+            for (int i = 0; i < realRead; i++) {
+                buf[bufIdx] = myBuf[i]; 
+                bufIdx++;
+
+                if (bufIdx == n) {
+                    return n;
+                } 
             }
         }
 
