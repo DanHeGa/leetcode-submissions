@@ -1,27 +1,34 @@
 class Vector2D {
     private:
-        vector<int> vec1D; //dynamically changing size
-        int vecSize;
-        int it;
+        int i;
+        int j;
+        vector<vector<int>> vec;
     public:
         Vector2D(vector<vector<int>>& vec) {
-            for (vector<int> subVec : vec) {
-                for (int ele : subVec) {
-                    vec1D.push_back(ele);
-                }
+            this->vec = vec;
+            this->i = 0;
+            this->j = 0;
+            checkIncrement();
+        }
+
+        void checkIncrement() {
+            while(i < vec.size() && j == vec[i].size()) {
+                j = 0;
+                i++;
             }
-            vecSize = vec1D.size();
-            it = 0;
         }
         
         int next() {
-            int res = vec1D[it];
-            it++;
+            cout << i << ", " << j << endl;
+            int res = vec[i][j];
+            j++;
+            checkIncrement();
+
             return res;
         }
         
         bool hasNext() {
-            return it < vecSize;
+            return i < vec.size();
         }
 };
 
