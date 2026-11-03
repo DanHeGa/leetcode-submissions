@@ -1,12 +1,11 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        //count number of fresh oranges, as well as getting the location of rotten ones
         queue<pair<int, int>> q;
         int freshOnes = 0;
+        //count rotten oranges
         int n = grid.size();
         int m = grid[0].size();
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 1) {
@@ -17,32 +16,37 @@ public:
             }
         }
 
-        //pair wise movements to rott adjacent fresh fruits 
-        int rotten = 0;
         int minutes = 0;
         vector<int> pairWise = {-1, 0, 1, 0, -1};
         while(!q.empty()) {
+            bool sthmgRott = false;
             int qSize = q.size();
-            bool smthgRott = false; 
+
+            //for each rott orange, check its adjacent FRESH ones and ROTT them
             for (int i = 0; i < qSize; i++) {
                 pair<int, int> currRott = q.front();
                 q.pop();
                 
                 for (int k = 0; k < 4; k++) {
-                    int newRow = currRott.first + pairWise[k];
-                    int newCol = currRott.second + pairWise[k + 1];
+                    int newI = currRott.first + pairWise[k];
+                    int newJ = currRott.second + pairWise[k + 1];
 
-                    if (newRow < n && newRow >= 0 && newCol < m && newCol >= 0 && grid[newRow][newCol] == 1) {
-                        q.push({newRow, newCol});
-                        rotten++;
-                        grid[newRow][newCol] = 2;
-                        smthgRott = true;
+                    //check limits
+                    if (newI >= 0 && newI < n && newJ >= 0 && newJ < m && grid[newI][newJ] == 1) {
+                        //mark as rotten (visited), and add to queue
+                        q.push({newI, newJ});
+                        grid[newI][newJ] = 2;
+                        freshOnes--;
+                        sthmgRott = true;
                     }
                 }
             }
-            if (smthgRott) minutes++;
+
+            if (sthmgRott) {
+                minutes++;
+            }
         }
 
-        return rotten == freshOnes ? minutes : -1;
+        return freshOnes == 0 ? minutes : -1;
     }
 };
