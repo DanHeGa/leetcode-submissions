@@ -1,49 +1,49 @@
 class MedianFinder {
-private:
-    priority_queue<int> maxheap;
-    priority_queue<int, vector<int>, greater<int>> minheap;
+    priority_queue<int> left; //max heap
+    priority_queue<int, vector<int>, greater<int>> right; //min heap
     int size;
 public:
     MedianFinder() {
-        size = 0;
+        this->size = 0;
     }
     
     void addNum(int num) {
-        //empty case
-        if (maxheap.empty() && minheap.empty()) {
-            maxheap.push(num);
+        if (left.empty() && right.empty()) {
+            left.push(num);
             size++;
             return;
         }
 
-        if (num > maxheap.top()) { //if more than largest from left array
-            minheap.push(num); //add to right partition of the array
-        } else {
-            maxheap.push(num);
+        if (num > left.top()) {
+            right.push(num);
+        } else { //num < left.top()
+            left.push(num);
         }
 
-        //check we still have valid size for both array partitions
-        if (minheap.size() > maxheap.size() + 1) {
-            int ele = minheap.top();
-            minheap.pop();
-            maxheap.push(ele);
-        } else if (maxheap.size() > minheap.size() + 1) {
-            int ele = maxheap.top();
-            maxheap.pop();
-            minheap.push(ele);
+        if (right.size() > left.size() + 1) {
+            //take rights min to be the next left max value
+            int rightMin = right.top();
+            right.pop();
+
+            left.push(rightMin);
+        } else if (left.size() > right.size() + 1) { //right.size() < left.size() + 1
+            int leftMax = left.top();
+            left.pop();
+
+            right.push(leftMax);
         }
 
         size++;
     }
     
     double findMedian() {
-        if (size % 2 == 0) {
-            return (maxheap.top() + minheap.top()) / 2.0;
-        } else { //odd size
-            if (maxheap.size() > minheap.size()) {
-                return maxheap.top();
+        if (size % 2 == 0) { //even size
+            return (left.top() + right.top()) / 2.0;
+        } else {
+            if (left.size() > right.size()) {
+                return left.top();
             } else {
-                return minheap.top();
+                return right.top();
             }
         }
     }
