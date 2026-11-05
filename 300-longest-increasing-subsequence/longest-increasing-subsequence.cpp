@@ -2,19 +2,19 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         //vector to represent the longest increasing subsequence
-        int n = nums.size();
-        vector<int> dp(n, 1);
+        vector<int> tails; //O(n) - space
 
         int maxLis = 1;
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    dp[i] = max(dp[i], dp[j] + 1);
-                    maxLis = max(maxLis, dp[i]);
-                }
+        for (int num : nums) { 
+            auto lowerB = lower_bound(tails.begin(), tails.end(), num);
+
+            if (lowerB == tails.end()) { //no other element is >= num
+                tails.push_back(num);
+            } else {
+                *lowerB = num;
             }
         }
 
-        return maxLis;
+        return tails.size();
     }
 };
