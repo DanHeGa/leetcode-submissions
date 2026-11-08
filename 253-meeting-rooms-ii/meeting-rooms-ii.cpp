@@ -2,12 +2,10 @@ class Solution {
 public:
     int minMeetingRooms(vector<vector<int>>& intervals) {
         //get time stamp based room count
-        int maxTime = 0;
         map<int, int> mp;
         for (auto interval : intervals) {
             mp[interval[0]]++;
             mp[interval[1]]--;
-            maxTime = max(maxTime, interval[1]);
         }
 
         int overlaps = 0;
