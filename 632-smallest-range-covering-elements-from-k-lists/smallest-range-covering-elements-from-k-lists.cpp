@@ -16,13 +16,11 @@ public:
         int n = pairs.size(); 
 
         int left = 0;
-        int inclusiveCount = 0;
         
         vector<int> minRange = {0, INT_MAX};
         unordered_map<int, int> numCount; //should all be 1 in the ideal case
         for (int right = 0; right < n; right++) {
             numCount[pairs[right].second]++;
-            inclusiveCount++;
 
             while(numCount.size() == nums.size()) {
                 int a = pairs[left].first;
