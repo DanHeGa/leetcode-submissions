@@ -4,60 +4,47 @@ public:
         unordered_map<char, int> freqT;
         unordered_map<char, int> freqS;
 
-        for (char letter : t) {
-            freqT[letter]++;
+        //get T frequency of each char
+        for (char c : t) {
+            freqT[c]++;
         }
 
         int minLen = INT_MAX;
         int minLeft, minRight;
-        int have = 0; 
+
+        int have = 0;
         int need = freqT.size();
+        
+        int left = 0;
+        for (int r = 0; r < s.length(); r++) {
+            // add to s[r] frequency count
+            char currChar = s[r];
+            freqS[currChar]++;
 
-        int n = s.length();
-        int r = 0, l = 0;
-        while (r < n) {
-            freqS[s[r]]++;
-
-            if (freqT.find(s[r]) != freqT.end() &&
-                freqS[s[r]] == freqT[s[r]]) {
-                    have++;
+            //if freq of a char is equal in both maps, then add to have
+            if (freqT.contains(currChar) && freqT[currChar] == freqS[currChar]) {
+                have++;
             }
 
             while (have == need) {
-                int len = r - l + 1;
-                if (len < minLen) {
-                    minLen = len;
-                    minLeft = l;
+                //update minlen
+                int currLen = r - left + 1;
+                if (currLen < minLen) {
+                    minLen = currLen;
+                    minLeft = left;
                     minRight = r;
-                }
+                } 
 
-                freqS[s[l]]--;
-                if (freqT.count(s[l]) && freqS[s[l]] < freqT[s[l]]){
+                //move left until we dont have need == ave anymore (so we can see more options from different start positions)
+                freqS[s[left]]--;
+                if (freqS[s[left]] < freqT[s[left]]) {
                     have--;
                 }
 
-                l++;
+                left++;
             }
-
-            r++;
         }
 
-        //int minLeft, minRight;
-        string minSubStr = minLen != INT_MAX ? s.substr(minLeft, minLen) : "";
-        cout << "Res: " << minSubStr << endl;
-        return minSubStr;
+        return minLen != INT_MAX ? s.substr(minLeft, minLen) : ""; 
     }
 };
-
-/*
-freqT = {
-    A : 1,
-    B : 1,
-    C : 1
-}
-
-freqS ={
-
-}
-
-*/
