@@ -37,7 +37,7 @@ public:
 
                 //move left until we dont have need == ave anymore (so we can see more options from different start positions)
                 freqS[s[left]]--;
-                if (freqS[s[left]] < freqT[s[left]]) {
+                if (freqT.contains(s[left]) && freqS[s[left]] < freqT[s[left]]) {
                     have--;
                 }
 
